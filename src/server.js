@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static("frontend"));
 
-app.use("api/products", productRoutes);
+app.use("/api/products", productRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server běží na ${SERVER_URL}:${PORT}`);
