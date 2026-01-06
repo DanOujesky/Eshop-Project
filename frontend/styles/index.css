@@ -80,6 +80,9 @@ header {
   margin-bottom: 1rem;
   flex-grow: 1;
 }
+#cart-count {
+  font-weight: bold;
+}
 
 .product-price {
   font-size: 1.25rem;
