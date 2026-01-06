@@ -1,9 +1,0 @@
-{
-  "db": {
-    "host": "localhost",
-    "user": "root",
-    "password": "KoloKolo6!",
-    "database": "eshop"
-  },
-  "port": 3000
-}
