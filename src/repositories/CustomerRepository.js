@@ -14,4 +14,12 @@ export class CustomerRepository {
     );
     return res.insertId;
   }
+  async createMany(customers, conn) {
+    for (const c of customers) {
+      await conn.query(
+        "INSERT INTO customers (first_name, last_name, email) VALUES (?, ?, ?)",
+        [c.first_name, c.last_name, c.email]
+      );
+    }
+  }
 }

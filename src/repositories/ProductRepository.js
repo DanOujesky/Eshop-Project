@@ -23,4 +23,12 @@ export class ProductRepository {
     );
     return rows[0].totalProducts;
   }
+  async createMany(products, conn) {
+    for (const p of products) {
+      await conn.query(
+        "INSERT INTO products (name, description, price, stock) VALUES (?, ?, ?, ?)",
+        [p.name, p.description, p.price, p.stock]
+      );
+    }
+  }
 }
