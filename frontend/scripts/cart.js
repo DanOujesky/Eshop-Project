@@ -3,7 +3,7 @@ const totalPriceEl = document.getElementById("total-price");
 const checkoutButton = document.getElementById("checkout-btn");
 
 checkoutButton.addEventListener("click", () => {
-  window.location.href = "/order";
+  window.location.href = "/order.html";
 });
 
 function getCart() {

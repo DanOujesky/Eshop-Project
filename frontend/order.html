@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objednávka</title>
+    <link rel="stylesheet" href="./styles/order.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">MyShop</div>
+      <a href="cart.html" class="cart-status">
+        Košík (<span id="cart-count">0</span>)
+      </a>
+    </header>
+
+    <main class="order-wrapper">
+      <h1>Objednávkový formulář</h1>
+
+      <form class="order-form" action="/order" method="POST">
+        <div class="form-group">
+          <label for="firstName">Jméno</label>
+          <input type="text" id="firstName" name="firstName" required />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Příjmení</label>
+          <input type="text" id="lastName" name="lastName" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <button type="submit" class="submit-btn">Odeslat objednávku</button>
+      </form>
+    </main>
+  </body>
+</html>
