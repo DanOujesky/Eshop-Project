@@ -18,7 +18,7 @@ function updateCartCount() {
 
 async function loadProducts() {
   try {
-    const res = await fetch("/api/products");
+    const res = await fetch("/api/product");
     if (!res.ok) {
       throw new Error("Nepodařilo se načíst data");
     }

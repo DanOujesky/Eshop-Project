@@ -8,6 +8,9 @@ if (cartCountEl) {
 function getCart() {
   return JSON.parse(localStorage.getItem("cart")) || [];
 }
+function removeCart() {
+  localStorage.setItem("cart", "");
+}
 
 function updateCartCount() {
   const cart = getCart();
@@ -60,6 +63,8 @@ form.addEventListener("submit", async (e) => {
     }
 
     alert("Objednávka úspěšně odeslána");
+    removeCart();
+    updateCartCount();
     form.reset();
   } catch (err) {
     console.error(err);

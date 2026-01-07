@@ -3,7 +3,11 @@ const totalPriceEl = document.getElementById("total-price");
 const checkoutButton = document.getElementById("checkout-btn");
 
 checkoutButton.addEventListener("click", () => {
-  window.location.href = "/order.html";
+  if (getCart.length > 0) {
+    window.location.href = "/order.html";
+  } else {
+    alert("Nejdříve přidejte něco do košíku");
+  }
 });
 
 function getCart() {

@@ -1,7 +1,7 @@
 export class OrderRepository {
   async create(customerId, conn) {
     const [res] = await conn.query(
-      "INSERT INTO orders (customer_id, total_price, created_at) VALUES (?, 0, NOW())",
+      "INSERT INTO orders (customer_id, total_price,status, created_at) VALUES (?, 0,'ordered', NOW())",
       [customerId]
     );
     return res.insertId;
