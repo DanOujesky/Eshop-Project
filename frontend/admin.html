@@ -43,6 +43,31 @@
           Aktualizovat report
         </button>
       </section>
+      <section class="import-section">
+        <h2>Import dat</h2>
+
+        <div class="import-buttons">
+          <label class="import-btn">
+            Import produktů
+            <input
+              type="file"
+              id="importProductsFile"
+              accept=".csv,.json,.xml"
+              hidden
+            />
+          </label>
+
+          <label class="import-btn">
+            Import zákazníků
+            <input
+              type="file"
+              id="importUsersFile"
+              accept=".csv,.json,.xml"
+              hidden
+            />
+          </label>
+        </div>
+      </section>
     </main>
 
     <script src="./scripts/admin.js" type="module"></script>

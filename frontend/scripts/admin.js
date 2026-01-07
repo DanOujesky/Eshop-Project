@@ -1,20 +1,50 @@
-const cartCountEl = document.getElementById("cart-count");
+const importProductsFile = document.getElementById("importProductsFile");
+importProductsFile.addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
 
-function getCart() {
+  const formData = new FormData();
+  formData.append("file", file);
+
   try {
-    return JSON.parse(localStorage.getItem("cart")) || [];
-  } catch {
-    return [];
+    const res = await fetch("/api/admin/import/products", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Chyba při importu");
+
+    alert("Produkty úspěšně importovány");
+  } catch (err) {
+    console.error(err);
+    alert("Chyba při importu produktů");
   }
-}
+});
 
-function updateCartCount() {
-  if (!cartCountEl) return;
-  const cart = getCart();
-  cartCountEl.textContent = cart.length;
-}
+const importUsersFile = document.getElementById("importUsersFile");
+importUsersFile.addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
 
-updateCartCount();
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    const res = await fetch("/api/admin/import/users", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Chyba při importu");
+
+    alert("Zákazníci úspěšně importováni");
+  } catch (err) {
+    console.error(err);
+    alert("Chyba při importu zákazníků");
+  }
+});
 
 const totalProductsEl = document.getElementById("total-products");
 const totalOrdersEl = document.getElementById("total-orders");
