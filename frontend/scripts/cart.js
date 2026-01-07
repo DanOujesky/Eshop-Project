@@ -1,5 +1,10 @@
 const cartItemsEl = document.getElementById("cart-items");
 const totalPriceEl = document.getElementById("total-price");
+const checkoutButton = document.getElementById("checkout-btn");
+
+checkoutButton.addEventListener("click", () => {
+  window.location.href = "/order";
+});
 
 function getCart() {
   return JSON.parse(localStorage.getItem("cart")) || [];

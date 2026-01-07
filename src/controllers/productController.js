@@ -10,3 +10,5 @@ export const createProduct = async (req, res) => {
   await repo.create(req.body);
   res.sendStatus(201);
 };
+
+
