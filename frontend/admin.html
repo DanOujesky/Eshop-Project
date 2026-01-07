@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="./styles/admin.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">MyShop Admin</div>
+    </header>
+
+    <main class="admin-wrapper">
+      <h1>Admin Dashboard</h1>
+
+      <section class="report-section">
+        <h2>Souhrnný report</h2>
+
+        <div class="report-cards">
+          <div class="report-card">
+            <h3>Počet produktů</h3>
+            <p id="total-products">0</p>
+          </div>
+
+          <div class="report-card">
+            <h3>Počet objednávek</h3>
+            <p id="total-orders">0</p>
+          </div>
+
+          <div class="report-card">
+            <h3>Celková tržba</h3>
+            <p id="total-revenue">0 Kč</p>
+          </div>
+
+          <div class="report-card">
+            <h3>Nejprodávanější produkt</h3>
+            <p id="top-product">-</p>
+          </div>
+        </div>
+
+        <button id="refreshReportBtn" class="refresh-btn">
+          Aktualizovat report
+        </button>
+      </section>
+    </main>
+
+    <script src="./scripts/admin.js" type="module"></script>
+  </body>
+</html>
