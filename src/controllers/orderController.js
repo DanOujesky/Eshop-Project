@@ -1,7 +1,19 @@
-import { ProductRepository } from "../repositories/ProductRepository.js";
+import { OrderService } from "../services/OrderService.js";
 
-const repo = new ProductRepository();
+const orderService = new OrderService();
 
-const createOrder = async (req,res) => {
-    
-}
+export const createOrder = async (req, res) => {
+  try {
+    const { userData, orderData } = req.body;
+
+    const result = await orderService.createOrder(userData, orderData);
+
+    res.status(201).json({
+      message: "Objednávka vytvořena",
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: err.message,
+    });
+  }
+};
