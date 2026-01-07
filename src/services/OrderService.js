@@ -1,47 +1,60 @@
 import { pool } from "../db/db.js";
-import { ProductRepository } from "../repositories/ProductRepository";
+import { CustomerRepository } from "../repositories/CustomerRepository.js";
+import { ProductRepository } from "../repositories/ProductRepository.js";
+import { OrderRepository } from "../repositories/OrderRepository.js";
+import { OrderItemRepository } from "../repositories/OrderItemRepository.js";
 
 export class OrderService {
   constructor() {
-    this.productRepository = new ProductRepository();
+    this.customerRepo = new CustomerRepository();
+    this.productRepo = new ProductRepository();
+    this.orderRepo = new OrderRepository();
+    this.orderItemRepo = new OrderItemRepository();
   }
 
-  async createOrder(customerId, items) {
+  async createOrder(userData, cartItems) {
     const conn = await pool.getConnection();
 
     try {
       await conn.beginTransaction();
 
-      const [orderResult] = await conn.query(
-        "INSERT INTO orders (customer_id, total_price, created_at) VALUES (?, 0, NOW())",
-        [customerId]
-      );
+      let customer = await this.customerRepo.findByEmail(userData.email, conn);
 
-      const orderId = orderResult.insertId;
+      let customerId;
+      if (!customer) {
+        customerId = await this.customerRepo.create(userData, conn);
+      } else {
+        customerId = customer.id;
+      }
+
+      const orderId = await this.orderRepo.create(customerId, conn);
+
       let totalPrice = 0;
 
-      for (const item of items) {
-        const product = await this.productRepo.findById(item.productId);
+      for (const item of cartItems) {
+        const product = await this.productRepo.findById(item.id, conn);
 
         if (!product) {
-          throw new Error("Produkt neexistuje");
+          throw new Error(`Produkt ${item.id} neexistuje`);
         }
 
-        const price = product.price;
-        totalPrice += price * item.quantity;
+        totalPrice += product.price * item.quantity;
 
-        await conn.query(
-          "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)",
-          [orderId, item.productId, item.quantity, price]
+        await this.orderItemRepo.create(
+          {
+            orderId,
+            productId: product.id,
+            quantity: item.quantity,
+            price: product.price,
+          },
+          conn
         );
       }
 
-      await conn.query("UPDATE orders SET total_price = ? WHERE id = ?", [
-        totalPrice,
-        orderId,
-      ]);
+      await this.orderRepo.updateTotal(orderId, totalPrice, conn);
 
       await conn.commit();
+
       return { orderId, totalPrice };
     } catch (err) {
       await conn.rollback();
