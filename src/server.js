@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 const PORT = process.env.PORT;
 const SERVER_URL = process.env.SERVER_URL;
@@ -13,6 +14,7 @@ app.use(express.static("frontend"));
 
 app.use("/api/product", productRoutes);
 app.use("/api/order", orderRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server běží na ${SERVER_URL}:${PORT}`);

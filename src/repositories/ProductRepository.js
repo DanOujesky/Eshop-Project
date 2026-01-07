@@ -17,4 +17,10 @@ export class ProductRepository {
     ]);
     return row || null;
   }
+  async countProducts(conn = pool) {
+    const [rows] = await conn.query(
+      "SELECT COUNT(*) as totalProducts FROM products"
+    );
+    return rows[0].totalProducts;
+  }
 }
