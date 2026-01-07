@@ -6,7 +6,11 @@ if (cartCountEl) {
 }
 
 function getCart() {
-  return JSON.parse(localStorage.getItem("cart")) || [];
+  try {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  } catch {
+    return [];
+  }
 }
 function removeCart() {
   localStorage.setItem("cart", "");

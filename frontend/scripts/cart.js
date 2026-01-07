@@ -3,7 +3,7 @@ const totalPriceEl = document.getElementById("total-price");
 const checkoutButton = document.getElementById("checkout-btn");
 
 checkoutButton.addEventListener("click", () => {
-  if (getCart.length > 0) {
+  if (getCart().length > 0) {
     window.location.href = "/order.html";
   } else {
     alert("Nejdříve přidejte něco do košíku");
@@ -11,7 +11,11 @@ checkoutButton.addEventListener("click", () => {
 });
 
 function getCart() {
-  return JSON.parse(localStorage.getItem("cart")) || [];
+  try {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  } catch {
+    return [];
+  }
 }
 
 function saveCart(cart) {

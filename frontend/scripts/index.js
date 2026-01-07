@@ -2,7 +2,11 @@ const productContainer = document.querySelector(".product-container");
 const cartCountEl = document.getElementById("cart-count");
 
 function getCart() {
-  return JSON.parse(localStorage.getItem("cart")) || [];
+  try {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  } catch {
+    return [];
+  }
 }
 
 function saveCart(cart) {
