@@ -17,8 +17,13 @@ function updateCartCount() {
 
 const form = document.getElementById("orderForm");
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  const submitBtn = document.querySelector(".submit-btn");
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Odesílám...";
 
   clearErrors();
 
@@ -34,10 +39,35 @@ form.addEventListener("submit", (e) => {
 
   if (!result.success) {
     showErrors(result.error.flatten().fieldErrors);
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Odeslat objednávku";
     return;
   }
 
-  form.submit();
+  try {
+    const res = await fetch("/api/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userData: result.data, orderData: getCart() }),
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      alert(err.message || "Chyba při odeslání objednávky");
+      return;
+    }
+
+    alert("Objednávka úspěšně odeslána");
+    form.reset();
+  } catch (err) {
+    console.error(err);
+    alert("Server není dostupný");
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Odeslat objednávku";
+  }
 });
 
 function showErrors(errors) {

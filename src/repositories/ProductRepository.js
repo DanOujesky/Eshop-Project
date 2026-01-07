@@ -11,4 +11,10 @@ export class ProductRepository {
       [product.name, product.price, product.available, product.categoryId]
     );
   }
+  async findById(id, conn) {
+    const [[row]] = await conn.query("SELECT * FROM products WHERE id = ?", [
+      id,
+    ]);
+    return row || null;
+  }
 }
