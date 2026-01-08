@@ -5,5 +5,8 @@ export const config = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
   },
-  port: process.env.DB_PORT,
+  upload: {
+    dir: process.env.UPLOAD_DIR || "uploads",
+    maxImportSizeMB: Number(process.env.MAX_IMPORT_SIZE) || 5,
+  },
 };

@@ -3,9 +3,16 @@ import multer from "multer";
 import csvParser from "csv-parser";
 import fs from "fs";
 import xml2js from "xml2js";
+import { config } from "../config/config.js";
 
 const adminService = new AdminService();
-const upload = multer({ dest: "uploads/" });
+
+const upload = multer({
+  dest: config.upload.dir,
+  limits: {
+    fileSize: config.upload.maxImportSizeMB * 1024 * 1024,
+  },
+});
 
 export const getReport = async (req, res) => {
   try {
