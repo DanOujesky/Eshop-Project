@@ -14,7 +14,8 @@ Použité design patterny:
 - Repository pattern
 
 Instalace a spuštění:
-- viz Testovací scénář 1 - https://github.com/DanOujesky/Eshop-Project/blob/main/tests/Testovac%C3%AD%20sc%C3%A9n%C3%A1%C5%99%20-%20instalace%20spu%C5%A1t%C4%9Bn%C3%AD%20aplikace%20%2B%20import%20DB.pdf
+- Online: https://eshop-project-xv5q.onrender.com 
+- Lokálně: viz Testovací scénář 1 - https://github.com/DanOujesky/Eshop-Project/blob/main/tests/Testovac%C3%AD%20sc%C3%A9n%C3%A1%C5%99%20-%20instalace%20spu%C5%A1t%C4%9Bn%C3%AD%20aplikace%20%2B%20import%20DB.pdf
 
 Konfigurace:
 - všechna konfigurace je v .env souboru 
