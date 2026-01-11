@@ -90,3 +90,108 @@
 .import-btn input[type="file"] {
   display: none;
 }
+
+.product-section {
+  margin-top: 3rem;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.product-section h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--text-main);
+}
+
+.product-section input,
+.product-section select,
+.product-section textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.product-section textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.product-section button#saveBtn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.product-section button#saveBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+#productList {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-color);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.product-item:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.product-actions button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  transition: color 0.2s;
+}
+
+.product-actions .edit-btn:hover {
+  color: var(--primary-color);
+}
+
+.product-actions .delete-btn:hover {
+  color: crimson;
+}
+
+@media (min-width: 600px) {
+  .product-section form-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .product-section input,
+  .product-section select,
+  .product-section textarea {
+    flex: 1 1 200px;
+  }
+
+  .product-section button#saveBtn {
+    flex: 0 0 auto;
+    align-self: flex-end;
+  }
+}
