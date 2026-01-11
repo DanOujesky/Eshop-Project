@@ -11,7 +11,7 @@ Struktura databáze:
 - Vazby M:N: order_items spojuje orders a products
 
 Použité design patterny:
-- Repository pattern
+- Repository pattern - D1
 
 Instalace a spuštění:
 - Online: https://eshop-project-xv5q.onrender.com 
