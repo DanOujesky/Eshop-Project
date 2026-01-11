@@ -16,6 +16,7 @@ create table categories (
 create table products (
   id int auto_increment primary key,
   name varchar(100),
+  description varchar(100),
   price float,
   available boolean,
   category_id int,
@@ -41,19 +42,18 @@ create table order_items (
   foreign key (product_id) references products(id)
 );
 
-insert into categories (name) values
+INSERT INTO categories (name) VALUES
 ('Elektronika'),
 ('Oblečení'),
-('Knihy');
+('Knihy'),
+('Domácnost');
 
-insert into products (name, price, available, category_id) values
-('Mobilní telefon', 7999.99, 1, 1),
-('Notebook', 15999.50, 1, 1),
-('Tričko', 299.90, 1, 2),
-('Džíny', 999.00, 0, 2),
-('Román "Cesta"', 349.00, 1, 3),
-('Učebnice matematiky', 499.00, 1, 3);
-
-
-
-
+INSERT INTO products (name, description, price, available, category_id) VALUES
+('Smartphone X', 'Nový model smartphone s 128GB', 799.99, true, 1),
+('Laptop Pro', 'Výkonný laptop pro práci i zábavu', 1299.50, true, 1),
+('Tričko Sport', 'Bavlněné tričko, modrá barva', 19.99, true, 2),
+('Džíny Classic', 'Modré džíny, velikost M', 49.90, false, 2),
+('Kniha PHP Programování', 'Učebnice programování v PHP', 29.90, true, 3),
+('Kniha Fantasy Saga', 'První díl fantasy ságy', 24.50, true, 3),
+('Vysavač UltraClean', 'Výkonný vysavač do domácnosti', 199.00, true, 4),
+('Mixér KitchenPro', 'Výkonný mixér na smoothie', 89.90, false, 4);
