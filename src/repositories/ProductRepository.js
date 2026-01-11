@@ -31,4 +31,14 @@ export class ProductRepository {
       );
     }
   }
+  async update(id, product) {
+    await pool.query(
+      "UPDATE products SET name=?, price=?, status=?, category_id=? WHERE id=?",
+      [product.name, product.price, product.status, product.categoryId, id]
+    );
+  }
+
+  async delete(id) {
+    await pool.query("DELETE FROM products WHERE id=?", [id]);
+  }
 }
