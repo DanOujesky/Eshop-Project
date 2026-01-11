@@ -1,3 +1,5 @@
+import { productSchema } from "../shared/validation/productSchema.js";
+
 const nameInput = document.getElementById("name");
 const priceInput = document.getElementById("price");
 const availableInput = document.getElementById("available");
@@ -118,12 +120,14 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
   const available = availableInput.value === "ACTIVE" ? 1 : 0;
   const description = descriptionInput.value.trim();
 
-  if (!name || isNaN(price) || isNaN(categoryId)) {
-    alert("Vyplň všechna pole správně");
+  const product = { name, price, available, categoryId, description };
+
+  const result = productSchema.safeParse(product);
+
+  if (!result.success) {
+    alert(result.error.errors.map((e) => e.message).join("\n"));
     return;
   }
-
-  const product = { name, price, available, categoryId, description };
 
   const url = editId ? `/api/product/${editId}` : "/api/product";
   const method = editId ? "PUT" : "POST";
@@ -135,9 +139,9 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
   });
 
   if (!res.ok) {
-    const err = await res.text();
-    console.error(err);
-    alert("Chyba při ukládání produktu");
+    const data = await res.json();
+    console.error(data.error);
+    alert(data.error ? data.error : "Chyba při ukládání produktu");
     return;
   }
 
@@ -147,7 +151,7 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
 
 async function editProduct(id) {
   const res = await fetch(`/api/product/${id}`);
-  if (!res.ok) return;
+  if (!res.ok) return alert("Produkt nenalezen");
 
   const p = await res.json();
 
