@@ -69,7 +69,7 @@ async function fetchReport() {
     const data = await res.json();
     totalProductsEl.textContent = data.totalProducts;
     totalOrdersEl.textContent = data.totalOrders;
-    totalRevenueEl.textContent = `${data.totalRevenue} Kč`;
+    totalRevenueEl.textContent = `${data.totalRevenue.toFixed(2)} Kč`;
     topProductEl.textContent = data.topProduct || "-";
   } catch {
     alert("Chyba při načítání reportu");
