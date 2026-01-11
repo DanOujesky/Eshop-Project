@@ -5,6 +5,10 @@ export const config = {
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
+    ssl: {
+      rejectUnauthorized: true,
+      minVersion: "TLSv1.2",
+    },
   },
   upload: {
     dir: process.env.UPLOAD_DIR || "uploads",
