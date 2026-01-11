@@ -41,13 +41,19 @@ create table order_items (
   foreign key (product_id) references products(id)
 );
 
-create view v_order_summary as
-select o.id, c.first_name, o.total_price, o.created_at
-from orders o
-join customers c on c.id = o.customer_id;
+insert into categories (name) values
+('Elektronika'),
+('Oblečení'),
+('Knihy');
 
-create view v_product_sales as
-select p.name, sum(oi.quantity) as sold
-from order_items oi
-join products p on p.id = oi.product_id
-group by p.id;
+insert into products (name, price, available, category_id) values
+('Mobilní telefon', 7999.99, 1, 1),
+('Notebook', 15999.50, 1, 1),
+('Tričko', 299.90, 1, 2),
+('Džíny', 999.00, 0, 2),
+('Román "Cesta"', 349.00, 1, 3),
+('Učebnice matematiky', 499.00, 1, 3);
+
+
+
+
