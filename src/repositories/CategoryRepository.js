@@ -4,9 +4,10 @@ export class CategoryRepository {
   async exists(categoryId) {
     if (!categoryId) return false;
 
-    const [[row]] = await pool.query("SELECT id FROM categories WHERE id = ?", [
-      categoryId,
-    ]);
+    const [[row]] = await pool.query(
+      "SELECT id FROM valid_categories WHERE id = ?",
+      [categoryId]
+    );
 
     return !!row;
   }

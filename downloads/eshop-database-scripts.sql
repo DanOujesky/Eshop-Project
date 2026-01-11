@@ -42,6 +42,15 @@ create table order_items (
   foreign key (product_id) references products(id)
 );
 
+create view product_with_category as
+select p.id, p.name, p.price, p.available, p.description, p.category_id, c.name AS category_name
+from products p
+left join categories c ON p.category_id = c.id;
+
+create view valid_categories as
+select id, name from categories;
+
+
 INSERT INTO categories (name) VALUES
 ('Elektronika'),
 ('Oblečení'),

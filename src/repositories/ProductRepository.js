@@ -2,7 +2,7 @@ import { pool } from "../db/db.js";
 
 export class ProductRepository {
   async findAll() {
-    const [rows] = await pool.query("select * from products");
+    const [rows] = await pool.query("select * from product_with_category");
     return rows;
   }
   async create(product) {
